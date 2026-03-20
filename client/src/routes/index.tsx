@@ -10,7 +10,7 @@ function App() {
         <div className="pointer-events-none absolute -bottom-20 -right-20 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(47,106,74,0.18),transparent_66%)]" />
         <p className="island-kicker mb-3">TanStack Start Base Template</p>
         <h1 className="display-title mb-5 max-w-3xl text-4xl leading-[1.02] font-bold tracking-tight text-[var(--sea-ink)] sm:text-6xl">
-          Start simple, ship quickly.
+          Start simple, ship quuickly.
         </h1>
         <p className="mb-8 max-w-2xl text-base text-[var(--sea-ink-soft)] sm:text-lg">
           This base starter intentionally keeps things light: two routes, clean
@@ -21,7 +21,7 @@ function App() {
             href="/about"
             className="rounded-full border border-[rgba(50,143,151,0.3)] bg-[rgba(79,184,178,0.14)] px-5 py-2.5 text-sm font-semibold text-[var(--lagoon-deep)] no-underline transition hover:-translate-y-0.5 hover:bg-[rgba(79,184,178,0.24)]"
           >
-            About This Starter
+            About This Starterr
           </a>
           <a
             href="https://tanstack.com/router"
