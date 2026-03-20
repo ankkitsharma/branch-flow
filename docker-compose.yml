@@ -1,9 +1,29 @@
+#services:
+#  prod:
+#    build:
+#      context: ./client
+#      dockerfile: Dockerfile
+#    ports:
+#      - "80:80"
+#    environment:
+#      - NODE_ENV=production
+
 services:
-  prod:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./certs:/etc/nginx/ssl:ro
+    depends_on:
+      - client
+
+  client:
     build:
       context: ./client
       dockerfile: Dockerfile
-    ports:
-      - "80:80"
+    container_name: client
     environment:
       - NODE_ENV=production

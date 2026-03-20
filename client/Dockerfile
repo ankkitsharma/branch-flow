@@ -14,14 +14,32 @@ COPY . .
 RUN npm run build
 
 # production stage
-FROM nginx:alpine
+#FROM nginx:alpine
+#
+#COPY --from=build /app/dist /usr/share/nginx/html
+#
+#COPY nginx.conf /etc/nginx/conf.d/default.conf
+#
+#EXPOSE 80
+#
+#CMD ["nginx", "-g", "daemon off;"]
 
-COPY --from=build /app/dist /usr/share/nginx/html
+# production stage
+FROM node:${NODE_VERSION}
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+WORKDIR /app
 
-EXPOSE 80
+RUN npm install -g serve
 
-CMD ["nginx", "-g", "daemon off;"]
+COPY --from=build /app/dist ./dist
+
+EXPOSE 3000
+
+RUN chown -R node:node /app
+
+USER node
+
+CMD ["serve", "-s", "dist", "-l", "3000"]
+
 
 
