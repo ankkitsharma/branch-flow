@@ -2,7 +2,7 @@ services:
   dev:
     build:
       context: ./client
-      dockerfile: Dockerfile.dev
+      dockerfile: ./client/Dockerfile.dev
     ports:
       - "3000:3000"
     environment:
