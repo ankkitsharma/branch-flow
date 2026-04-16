@@ -1,6 +1,7 @@
 services:
   nginx:
     image: nginx:alpine
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
@@ -17,13 +18,14 @@ services:
   client:
     build:
       context: ./client
-      dockerfile: ./client/Dockerfile
+      dockerfile: Dockerfile
     container_name: client
     environment:
       - NODE_ENV=production
 
   certbot:
     image: certbot/certbot
+    restart: unless-stopped
     volumes:
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
