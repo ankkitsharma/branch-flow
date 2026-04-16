@@ -63,10 +63,10 @@ File changes in `./client/src` sync into the container automatically. Changes to
 
 ### 2. Prod-Local (self-signed SSL)
 
-Uses `docker-compose.yml`. Builds the production client bundle, serves it behind nginx with self-signed SSL certificates from `./certs/`.
+Uses `docker-compose-prod-local.yml`. Builds the production client bundle, serves it behind nginx with self-signed SSL certificates from `./certs/`.
 
 ```bash
-docker compose up --build
+docker compose -f docker-compose-prod-local.yml--build
 ```
 
 - HTTP → `http://localhost` (redirects to HTTPS)
@@ -76,19 +76,13 @@ docker compose up --build
 
 ### 3. Prod-Certbot (Let's Encrypt SSL)
 
-Uses `docker-compose-prod.yml` with certbot for automatic SSL certificate issuance and renewal. **Requires a public domain pointed at your server.**
+Uses `docker-compose.yml` with certbot for automatic SSL certificate issuance and renewal. **Requires a public domain pointed at your server.**
 
-#### Step 1: Configure environment
-
-```bash
-cp .env.example .env
-```
-
-Edit `.env`:
+#### Step 1: Configure init-letsencrypt.sh
 
 ```env
-DOMAIN=yourdomain.com
-CERTBOT_EMAIL=you@yourdomain.com
+domains=(yourdomain.com)
+email=(you@yourdomain.com)
 ```
 
 #### Step 2: Run the init script
@@ -96,8 +90,8 @@ CERTBOT_EMAIL=you@yourdomain.com
 This generates the nginx config from the template, obtains a real Let's Encrypt certificate, and starts all services.
 
 ```bash
-chmod +x scripts/init-letsencrypt.sh
-./scripts/init-letsencrypt.sh
+chmod +x init-letsencrypt.sh
+./init-letsencrypt.sh
 ```
 
 > Set `staging=1` inside the script to test against Let's Encrypt's staging environment and avoid rate limits during setup.
