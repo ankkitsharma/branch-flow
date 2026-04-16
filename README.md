@@ -105,7 +105,7 @@ chmod +x scripts/init-letsencrypt.sh
 #### Step 3: Start services
 
 ```bash
-docker compose -f docker-compose-prod.yml up -d
+docker compose -f docker-compose.yml up -d
 ```
 
 - HTTP → `http://yourdomain.com` (redirects to HTTPS, serves ACME challenges)
